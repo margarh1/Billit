@@ -3,10 +3,11 @@
 }
 
 .sidenavbar {
-  border: 1px solid #778899;
-  border-radius: 5px;
+  width: 300px;
+  border-radius: 2px;
   background-color: #778899;
-  padding: 30% 0 100% 0;
+  /*box-shadow: 3px 3px 3px #888888;*/
+  padding: 200px 0 100% 0;
 }
 
 .indexBackgroundImage {
@@ -21,8 +22,6 @@
 }
 
 #indexOverview {
-  /*border: 1px solid #ededed;*/
-  /*background-color: #ededed;*/
   height: 300px;
 }
 

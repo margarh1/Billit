@@ -1,4 +1,3 @@
-// require modules
 var mongoose = require('mongoose');
 var bcryptjs = require('bcryptjs');
 var Schema = mongoose.Schema;
@@ -16,7 +15,6 @@ UserSchema.statics.createSecure = function (name, email, password, callback) {
 // store it in variable `UserModel` because `this` changes context in nested callbacks
 
 var UserModel = this;
-
 // hash password user enters at sign up
 bcryptjs.genSalt(function (err, salt) {
   console.log('salt: ', salt);  // changes every time
@@ -59,8 +57,6 @@ UserSchema.methods.checkPassword = function (password) {
   return bcryptjs.compareSync(password, this.passwordDigest);
 };
 
-// define the user model
 var User = mongoose.model('User', UserSchema);
 
-// export the user model
 module.exports = User;

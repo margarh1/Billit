@@ -1,4 +1,3 @@
-// require express framework and additional modules
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
@@ -19,12 +18,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 mongoose.connect('mongodb://localhost/bill-it');
 
 
-// signup route (renders signup view)
+// get signup route
 app.get('/signup', function (req, res) {
   res.render('signup');
 });
 
-// Sign up route - creates a new user with a secure password
+// post sign up route
 app.post('/users', function (req, res) {
   console.log(req.body)
   // use the email and password to authenticate here
@@ -34,7 +33,7 @@ app.post('/users', function (req, res) {
   });
 });
 
-// login route with placeholder response
+// get login route
 app.get('/login', function (req, res) {
   res.render('login');
 });
@@ -53,34 +52,35 @@ app.post('/sessions', function (req, res) {
   });
 });
 
-  // index page
-  app.get('/', function(req, res) {
-     res.render('pages/index');
-  });
-  
-  app.get('/dashboard', function (req, res) {
-  // now find the user currently logged in
-  User.findOne({_id: req.session.userId}, function (err, currentUser) {
-    res.render('pages/dashboard.ejs', {user: currentUser})
-    });
-  });
+// get index page route
+app.get('/', function(req, res) {
+   res.render('pages/index');
+});
 
-  app.get('/howto', function (req, res) {
-  User.findOne({_id: req.session.userId}, function (err, currentUser) {
-    res.render('pages/howto.ejs', {user: currentUser})
-    });
+// get dashboard page route
+app.get('/dashboard', function (req, res) {
+// find user currently logged in
+User.findOne({_id: req.session.userId}, function (err, currentUser) {
+  res.render('pages/dashboard.ejs', {user: currentUser})
   });
+});
 
-  // logout route
-  app.get('/logout', function (req, res) {
-  // remove the session user id
-  req.session.userId = null;
-  // redirect to login (for now)
-  res.redirect('/login');
+// get how-to page route
+app.get('/howto', function (req, res) {
+User.findOne({_id: req.session.userId}, function (err, currentUser) {
+  res.render('pages/howto.ejs', {user: currentUser})
+  });
+});
+
+// get logout route
+app.get('/logout', function (req, res) {
+// remove the session user id
+req.session.userId = null;
+// redirect to login
+res.redirect('/login');
 });
 
 
-// listen on port 3000
 app.listen(3000, function () {
   console.log('server started on locahost:3000');
 });
