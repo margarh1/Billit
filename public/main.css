@@ -1,1 +1,58 @@
+.box {
+  border: 1px solid red;
+}
 
+.sidenavbar {
+  border: 1px solid #778899;
+  border-radius: 5px;
+  background-color: #778899;
+  padding: 30% 0 100% 0;
+}
+
+.indexBackgroundImage {
+  color: #464545;
+  border: 1px solid #1e8bc3;
+  height: 600px;
+  background-color: #1e8bc3;
+}
+
+.indexPageLinks {
+  margin-left: 20px;
+}
+
+#indexOverview {
+  /*border: 1px solid #ededed;*/
+  /*background-color: #ededed;*/
+  height: 300px;
+}
+
+.indexIcons {
+  margin-top: 40px;
+}
+
+#indexFeatures {
+  height: 400px;
+}
+
+.box1 {
+  margin-left: 70px;
+  border-radius: 5px;
+  background-color: #ededed;
+  height: 400px;
+  width: 500px;
+}
+
+.box2 {
+  margin-left: 30px;
+  border-radius: 5px;
+  background-color: #ededed;
+  height: 400px;
+  width: 500px;
+}
+
+.indexFooter {
+  margin-top: 100px;
+  color: white;
+  height: 250px;
+  background-color: #666666;
+}

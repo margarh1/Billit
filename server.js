@@ -53,16 +53,21 @@ app.post('/sessions', function (req, res) {
   });
 });
 
+  // index page
+  app.get('/', function(req, res) {
+     res.render('pages/index');
+  });
+  
   app.get('/dashboard', function (req, res) {
   // now find the user currently logged in
   User.findOne({_id: req.session.userId}, function (err, currentUser) {
-    res.render('dashboard.ejs', {user: currentUser})
+    res.render('pages/dashboard.ejs', {user: currentUser})
     });
   });
 
   app.get('/howto', function (req, res) {
   User.findOne({_id: req.session.userId}, function (err, currentUser) {
-    res.render('howto.ejs', {user: currentUser})
+    res.render('pages/howto.ejs', {user: currentUser})
     });
   });
 
