@@ -1,21 +1,68 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="">
   <head>
     <meta charset="utf-8">
     <title>angular practice</title>
   </head>
-  <body ng-init="names=['John Doe', 'Jane Doe', 'Will Smith']">
+  <!-- <body ng-init="names=['John Doe', 'Jane Doe', 'Will Smith']"> -->
+  <body ng-init="customers=[{name:'Kevin Tran',city:'San Jose'}, {name:'Marlene Tamayo',city:'San Jose'}, {name:'Mochi T',city:'San Jose'}]">
+  <body>
+
+<!-- data binding -->
     name:
     <br>
-    <input type="text" ng-model="name"> {{ name }}
+     <input type="text" ng-model="name">  {{ name }}
     <hr>
-    <ul>
+
+<!-- list of names -->
+    <!-- <ul>
       <li ng-repeat="personName in names">{{ personName }}</li>
+    </ul> -->
+
+<!-- filter by name property with customers array in body tag -->
+    <ul>
+      <li ng-repeat="hero in customers | filter:name"> {{ hero.name }} lives in {{ hero.city }} </li>
     </ul>
 
+<!-- filter by name property with customers array in SimpleController function -->
+  <!-- <div ng-controller="SimpleController">
+      name:
+      <br>
+       <input type="text" ng-model="name">
+      <hr>
 
-
+    <ul>
+      <li ng-repeat="hero in customers | filter:name"> {{ hero.name }} lives in {{ hero.city }} </li>
+    </ul>
+  </div> -->
 
     <script src="angular.min.js" charset="utf-8"></script>
+
+<!-- controller in view NOT RECOMMENDED -->
+    <!-- <script>
+      function SimpleController($scope) {
+        $scope.customers = [
+          {name:'Kevin Tran',city:'San Jose'},
+          {name:'Marlene Tamayo',city:'San Jose'},
+          {name:'Mochi T',city:'San Jose'}
+        ];
+      }
+    </script> -->
+
+
+    <!-- key features
+    ng-app = turns HTML into an angular app
+    ng-controller = binds data from a controller (js file with logic) to a div section of a view
+    ng-model = connects / data binds to the view
+    ng-repeat = iterates over data to render on the view
+
+    Directives = enhance html by manipulating the data (filters, ordering, etc.)
+    2 way data binding, connecting data from controllers to views
+    scope = "glue" that connects the views with controllers
+    controllers = control the data being passed to the views
+    routes = determine the views and controllers to render
+    modules =  -->
+
+
   </body>
 </html>

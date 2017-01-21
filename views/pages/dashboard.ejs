@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="billit">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- angular file -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+  <script src="scripts/app.js">
+
+
   <script src="scripts.js"></script>
   <title>Bill it!</title>
 </head>
@@ -17,6 +23,24 @@
   <div class="col-md-8 text-center">
     <h2>Dashboard</h2>
     <hr>
+
+    <div class="text-left" ng-controller="InvoicesIndexController as InvoicesIndexCtrl">
+      <p><b>Invoice Title:</b> {{ InvoicesIndexCtrl.newInvoice.title }}</p>
+      <p><b>Invoice Number:</b> {{ InvoicesIndexCtrl.newInvoice.number }}</p>
+      <p><b>Invoice Date:</b> {{ InvoicesIndexCtrl.newInvoice.date }}</p>
+      <p><b>Invoice Status:</b> {{ InvoicesIndexCtrl.newInvoice.status }}</p>
+      <p><b>Invoice Amount:</b> {{ InvoicesIndexCtrl.newInvoice.totalAmount }}</p>
+      <br><hr>
+      Search: <input type="text" ng-model="page"><br><br>
+      <ul>
+        <li ng-repeat="page in InvoicesIndexCtrl.invoices | orderBy: 'title' | filter: page">{{page.title}}, {{page.number}}, {{page.date}}</li>
+      </ul>
+    </div>
+
+
+
+
+
   </div>
 </div>
 
