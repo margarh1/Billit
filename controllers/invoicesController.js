@@ -8,16 +8,29 @@ function index(req, res) {
 
 function create(req, res) {
   console.log("created successful");
-  console.log('body', req.body);
+  // db.Invoice.create(req.body, function(err, invoice) {
+  //   if (err) { console.log('error', err); }
+  //   console.log(invoice);
+  //   res.json(invoice);
+  // });
+}
 
-  db.Invoice.create(req.body, function(err, invoice) {
-    if (err) { console.log('error', err); }
-    console.log(invoice);
-    res.json(invoice);
+function show(req, res) {
+  db.Invoice.findById(req.params.invoiceId, function(err, foundInvoice) {
+    if(err) { console.log('invoicesController.show error', err); }
+    console.log('invoicesController.show responding with', foundInvoice;
+    res.json(foundInvoice);
+  });
+}
+
+function destroy(req, res) {
+  db.Invoice.findOneAndRemove({ _id: req.params.invoiceId }, function(err, foundInvoice){
+    res.json(foundInvoice);
   });
 }
 
 module.exports = {
   index: index,
-  create: create
+  create: create,
+  destroy: destroy
 };

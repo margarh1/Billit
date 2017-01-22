@@ -7,7 +7,6 @@ var session = require('express-session');
 var db = require('./models');
 var app = express();
 
-
 // middleware
 app.use(express.static('public'));
 app.use(session({
@@ -21,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
+// ROUTES ////////////
 
 // get signup route
 app.get('/signup', function (req, res) {
@@ -84,6 +84,7 @@ req.session.userId = null;
 res.redirect('/login');
 });
 
+// display json database
 app.get('/api/invoices', function(req, res) {
   Invoice.find({})
     .populate('user')
@@ -93,45 +94,27 @@ app.get('/api/invoices', function(req, res) {
     });
 });
 
+// post new invoice to database
 app.post('/api/invoices', function(req, res) {
   Invoice.find({})
     .populate('user')
 
     db.Invoice.create(req.body, function(err, invoice) {
-      if (err) { console.log('error', err); }
+      if (err) { console.log('post create unsuccessful', err); }
       console.log(invoice);
       res.json(invoice);
     });
-
-
 });
 
+// delete an invoice
+app.delete('/api/invoices/:id', function(req, res) {
+  Invoice.find({})
+  .populate('user')
+  db.Invoice.findOneAndRemove({ _id: req.params.invoiceId }, function(err, foundInvoice){
+    res.json(foundInvoice);
+  });
+});
 
-
-// app.post('/api/invoices', function(req, res) {
-//   var newInvoice = new Invoice(req.body);
-//   User.findOne({
-//     email: req.body.user,
-//   }, function(err, invoiceUser) {
-//     if (err) {
-//       console.log(err);
-//       return
-//     }
-//     newInvoice.user = invoiceUser;
-//     invoiceUser.invoice.push(newInvoice);
-//     invoiceUser.save(function(err, succ) {
-//       if (err) {
-//         console.log(err);
-//       }
-//       newInvoice.save(function(err, succ) {
-//         if (err) {
-//           console.log(err);
-//         }
-//       res.redirect('../invoices');
-//       })
-//     });
-//   });
-// });
 
 
 

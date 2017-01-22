@@ -3,58 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- bootstrap css -->
+
+<!-- bootstrap css -->
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-  <!-- angular file -->
+<!-- angular file -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js" charset="utf-8"></script>
-  <script src="scripts/app.js">
 
+<!-- js files -->
+  <script src="scripts/app.js"></script>
 
-  <script src="scripts.js"></script>
   <title>Bill it!</title>
 </head>
 <body>
 <div class="row">
     <% include ../partials/sidebar %>
   <div class="col-md-8 text-center">
-    <h2>Dashboard</h2>
+    <h2>Dashboard</h2><br><br><br>
     <hr>
-
-    <!-- <div class="text-left" ng-controller="InvoicesIndexController as InvoicesIndexCtrl">
-      <p><b>Invoice Title:</b> {{ InvoicesIndexCtrl.newInvoice.title }}</p>
-      <p><b>Invoice Number:</b> {{ InvoicesIndexCtrl.newInvoice.number }}</p>
-      <p><b>Invoice Date:</b> {{ InvoicesIndexCtrl.newInvoice.date }}</p>
-      <p><b>Invoice Status:</b> {{ InvoicesIndexCtrl.newInvoice.status }}</p>
-      <p><b>Invoice Amount:</b> {{ InvoicesIndexCtrl.newInvoice.totalAmount }}</p>
-      <br><hr>
-      Search: <input type="text" ng-model="page"><br><br>
-      <ul>
-        <li ng-repeat="page in InvoicesIndexCtrl.invoices | orderBy: 'title' | filter: page">{{page.title}}, {{page.number}}, {{page.date}}</li>
-      </ul>
-    </div> -->
-
-    <div class="container" ng-controller="InvoicesIndexController as invoicesIndexCtrl">
+    <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
 
 <!-- new invoice input fields -->
-    <form ng-submit="invoicesIndexCtrl.casey()">
+    <form ng-submit="invoicesIndexCtrl.createInvoice()">
       <label for="">Invoice Title:</label>
       <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" value="">
       <label for="">Invoice Number:</label>
       <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" value="">
       <input type="submit" name="" value="submit">
+      <hr>
     </form><br>
 
-
-    <input type="text" class="form-control" placeholder="New invoice title" ng-model="InvoicesIndexCtrl.newInvoice.title">
-    <p><b>invoicesIndexCtrl.newInvoice:</b> {{invoicesIndexCtrl.newInvoice}}</p>
-
 <!-- filter invoices -->
-    <input type="text" class="form-control" ng-model="searchText" placeholder="Search Invoices">
+    <input type="text" class="form-group" ng-model="searchText" placeholder="Search Invoices"><br><br>
 
 <!-- templating invoices -->
     <div ng-repeat="invoice in invoicesIndexCtrl.invoices | orderBy: 'title' | filter: searchText" class="row">
@@ -68,19 +52,13 @@
             <h4 class="inline-header">Invoice number:</h4>
             <span>{{invoice.number}}</span>
           </li>
-            <div class="col-md-9 col-xs-12">
-              <ul class="list-group form-inline">
-              </ul>
-            </div>
+          <button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
-
-
-
-
 </body>
 </html>
