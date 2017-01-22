@@ -1,42 +1,41 @@
-console.log("app.js connected");
-
 angular
   .module('billit', [])
   .controller('InvoicesIndexController', InvoicesIndexController);
 
-  function InvoicesIndexController(){
+  InvoicesIndexController.$inject = ['$http'];
+  function InvoicesIndexController($http){
     var vm = this;
     vm.newInvoice = {};
 
     vm.newInvoice = {
-      title: 'Kitchen remodel',
-      number: 'P2456Z',
-      date: '1/1/2017',
-      status: 'Paid',
-      totalAmount: 10000
+      // title: 'Kitchen remodel',
+      // number: 'P2456Z',
+      // date: '1/1/2017',
+      // status: 'Paid',
+      // totalAmount: 10000
     };
 
-    vm.invoices = [
-      {
-        title: 'Website Development',
-        number: 'K6790Y8',
-        date: '1/1/2017',
-        status: 'Paid',
-        totalAmount: 5000
-      },
-      {
-        title: 'Wedding Phtotos',
-        number: 'U68864C',
-        date: '1/1/2017',
-        status: 'Pending',
-        totalAmount: 3000
-      },
-      {
-        title: 'Logo Design',
-        number: 'K7996W830',
-        date: '1/1/2017',
-        status: 'Paid',
-        totalAmount: 500
-      }
-    ];
+    vm.invoices = [];
+    $http({
+      method: 'GET',
+      url: '/api/invoices'
+    }).then(function successCallback(response) {
+      console.log("response successful");
+      vm.invoices = response.data;
+    }, function errorCallback(response) {
+      console.log('There was an error getting the data', response);
+    });
+
+    vm.createInvoice = function () {
+    $http({
+     method: 'POST',
+     url: '/api/invoices',
+     data: vm.newInvoice,
+    }).then(function successCallback(response) {
+     console.log("post works");
+     vm.invoices.push(response.data);
+    }, function errorCallback(response) {
+     console.log('There was an error posting the data', response);
+    });
+    }
   }

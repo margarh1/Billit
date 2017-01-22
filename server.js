@@ -3,6 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
+var Invoice = require('./models/invoice');
 var session = require('express-session');
 
 // middleware
@@ -15,7 +16,7 @@ app.use(session({
 }));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-mongoose.connect('mongodb://localhost/bill-it');
+mongoose.connect('mongodb://localhost/billit');
 
 
 // get signup route
@@ -79,6 +80,40 @@ req.session.userId = null;
 // redirect to login
 res.redirect('/login');
 });
+
+app.get('/api/invoices', function(req, res) {
+  Invoice.find({})
+    .populate('user')
+    .exec(function(err, success) {
+      res.json(success);
+    });
+});
+
+app.post('/api/invoices', function(req, res) {
+  var newInvoice = new Invoice(req.body);
+  User.findOne({
+    email: req.body.user,
+  }, function(err, invoiceUser) {
+    if (err) {
+      console.log(err);
+      return
+    }
+    newInvoice.user = invoiceUser;
+    invoiceUser.invoices.push(newInvoice);
+    invoiceUser.save(function(err, succ) {
+      if (err) {
+        console.log(err);
+      }
+      newInvoice.save(function(err, succ) {
+        if (err) {
+          console.log(err);
+        }
+      res.redirect('../invoices');
+      })
+    });
+  });
+});
+
 
 
 app.listen(3000, function () {
