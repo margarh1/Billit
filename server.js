@@ -1,10 +1,12 @@
 var express = require('express');
-var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var User = require('./models/user');
 var Invoice = require('./models/invoice');
 var session = require('express-session');
+var db = require('./models');
+var app = express();
+
 
 // middleware
 app.use(express.static('public'));
@@ -16,7 +18,8 @@ app.use(session({
 }));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
-mongoose.connect('mongodb://localhost/billit');
+app.use(bodyParser.json());
+
 
 
 // get signup route
@@ -85,34 +88,50 @@ app.get('/api/invoices', function(req, res) {
   Invoice.find({})
     .populate('user')
     .exec(function(err, success) {
+      console.log(err);
       res.json(success);
     });
 });
 
 app.post('/api/invoices', function(req, res) {
-  var newInvoice = new Invoice(req.body);
-  User.findOne({
-    email: req.body.user,
-  }, function(err, invoiceUser) {
-    if (err) {
-      console.log(err);
-      return
-    }
-    newInvoice.user = invoiceUser;
-    invoiceUser.invoices.push(newInvoice);
-    invoiceUser.save(function(err, succ) {
-      if (err) {
-        console.log(err);
-      }
-      newInvoice.save(function(err, succ) {
-        if (err) {
-          console.log(err);
-        }
-      res.redirect('../invoices');
-      })
+  Invoice.find({})
+    .populate('user')
+
+    db.Invoice.create(req.body, function(err, invoice) {
+      if (err) { console.log('error', err); }
+      console.log(invoice);
+      res.json(invoice);
     });
-  });
+
+
 });
+
+
+
+// app.post('/api/invoices', function(req, res) {
+//   var newInvoice = new Invoice(req.body);
+//   User.findOne({
+//     email: req.body.user,
+//   }, function(err, invoiceUser) {
+//     if (err) {
+//       console.log(err);
+//       return
+//     }
+//     newInvoice.user = invoiceUser;
+//     invoiceUser.invoice.push(newInvoice);
+//     invoiceUser.save(function(err, succ) {
+//       if (err) {
+//         console.log(err);
+//       }
+//       newInvoice.save(function(err, succ) {
+//         if (err) {
+//           console.log(err);
+//         }
+//       res.redirect('../invoices');
+//       })
+//     });
+//   });
+// });
 
 
 

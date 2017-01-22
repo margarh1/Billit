@@ -24,9 +24,15 @@ invoiceList.push({
               totalAmount: 500
             });
 
+// invoiceList.forEach(function(invoice) {
+// });
+
+db.Invoice.remove({}, function(err, invoices){
+
   db.Invoice.create(invoiceList, function(err, invoices){
     if (err) { return console.log('ERROR', err); }
     console.log("all invoices:", invoices);
     console.log("created", invoices.length, "invoices");
     process.exit();
   });
+});

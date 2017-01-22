@@ -4,6 +4,8 @@
 
 .sidenavbar {
   width: 300px;
+  height: 100vh;
+  position: fixed;
   border-radius: 2px;
   background-color: #778899;
   /*box-shadow: 3px 3px 3px #888888;*/

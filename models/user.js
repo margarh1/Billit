@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var bcryptjs = require('bcryptjs');
 var Schema = mongoose.Schema;
 
+var Invoice = require('./invoice');
+
 var UserSchema = new Schema({
   name: String,
   email: String,

@@ -1,4 +1,4 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
 //   $('#signup-form').on('submit', function(e) {
 //     e.preventDefault();
@@ -31,4 +31,4 @@ $(document).ready(function(){
 
 
 
-});
+// });
