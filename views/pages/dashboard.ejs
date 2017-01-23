@@ -46,13 +46,17 @@
         <div class="panel panel-default">
           <li class="list-group-item">
             <h4 class="inline-header">Invoice title:</h4>
-            <span>{{invoice.title}}</span>
+            <span ng-hide="editing">{{invoice.title}}</span>
+            <input ng-show="editing" ng-model="invoice.title" type="text" class="form-control input-md">
           </li>
           <li class="list-group-item">
             <h4 class="inline-header">Invoice number:</h4>
-            <span>{{invoice.number}}</span>
+            <span ng-hide="editing">{{invoice.number}}</span>
+            <input ng-show="editing" ng-model="invoice.number" type="text" class="form-control input-md">
           </li>
           <button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button>
+          <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit</button>
+          <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
           </div>
         </div>
       </div>

@@ -33,17 +33,28 @@ angular
     });
     }
 
-  vm.deleteInvoice = function (invoice) {
-  $http({
-    method: 'DELETE',
-    url: '/api/invoices/'+ invoice._id
-  }).then(function successCallback(json) {
-    var index = vm.invoices.indexOf(invoice);
-    console.log("index is: " + index);
-    vm.invoices.splice(index,1)
-  }, function errorCallback(response) {
-    console.log('There was an error deleting the invoice', response);
-  });
-}
+    vm.editInvoice = function (invoice) {
+    $http({
+      method: 'PUT',
+      url: '/api/invoices/'+invoice._id,
+      data: invoice
+    }).then(function successCallback(json){
+    }, function errorCallback(response) {
+      console.log('There was an error editing the data', response);
+    });
+    }
+
+    vm.deleteInvoice = function (invoice) {
+    $http({
+      method: 'DELETE',
+      url: '/api/invoices/'+ invoice._id
+    }).then(function successCallback(json) {
+      var index = vm.invoices.indexOf(invoice);
+      console.log("index is: " + index);
+      vm.invoices.splice(index,1)
+    }, function errorCallback(response) {
+      console.log('There was an error deleting the invoice', response);
+    });
+    }
 
 }

@@ -29,8 +29,22 @@ function destroy(req, res) {
   });
 }
 
+function update(req, res) {
+  console.log('updating with data', req.body);
+  db.Invoice.findById(req.params.invoiceId, function(err, foundInvoice) {
+    if(err) { console.log('invoicesController.update error', err); }
+    foundInvoice.title = req.body.title;
+    foundInvoice.number = req.body.number;
+    foundInvoice.save(function(err, savedInvoice) {
+      if(err) { console.log('saving altered invoice failed'); }
+      res.json(savedInvoice);
+    });
+  });
+}
+
 module.exports = {
   index: index,
   create: create,
-  destroy: destroy
+  destroy: destroy,
+  update: update
 };

@@ -1,3 +1,4 @@
+// required modules
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
@@ -98,7 +99,6 @@ app.get('/api/invoices', function(req, res) {
 app.post('/api/invoices', function(req, res) {
   Invoice.find({})
     .populate('user')
-
     db.Invoice.create(req.body, function(err, invoice) {
       if (err) { console.log('post create unsuccessful', err); }
       console.log(invoice);
@@ -114,6 +114,18 @@ app.delete('/api/invoices/:id', function(req, res) {
     res.json(foundInvoice);
   });
 });
+
+app.put('/api/invoices/:id', function(req, res) {
+  db.Invoice.findById(req.params.id, function(err, foundInvoice) {
+    if(err) { console.log('invoicesController.update error', err); }
+    foundInvoice.title = req.body.title;
+    foundInvoice.number = req.body.number;
+    foundInvoice.save(function(err, savedInvoice) {
+      if(err) { console.log('saving altered invoice failed'); }
+      res.json(savedInvoice);
+    });
+  });
+})
 
 
 
