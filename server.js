@@ -48,13 +48,24 @@ app.post('/sessions', function (req, res) {
   // use the email and password to authenticate here
   User.authenticate(req.body.name, req.body.email, req.body.password, function (err, loggedInUser) {
     if (err){
-      console.log('authentication error: ', err);
-      res.status(500).send();
+      res.redirect('/loginerror');
+      // console.log('authentication error: ', err);
+      // res.status(500).send();
     } else {
       req.session.userId = loggedInUser._id;
       res.redirect('/dashboard');
     }
   });
+});
+
+// get login error page route
+app.get('/loginerror', function(req, res) {
+   res.render('pages/loginerror');
+});
+
+// get signed out page route
+app.get('/signedout', function(req, res) {
+   res.render('pages/signedout');
 });
 
 // get index page route
@@ -74,6 +85,13 @@ User.findOne({_id: req.session.userId}, function (err, currentUser) {
 app.get('/howto', function (req, res) {
 User.findOne({_id: req.session.userId}, function (err, currentUser) {
   res.render('pages/howto.ejs', {user: currentUser})
+  });
+});
+
+// get new invoice page route
+app.get('/newinvoice', function (req, res) {
+User.findOne({_id: req.session.userId}, function (err, currentUser) {
+  res.render('pages/newinvoice.ejs', {user: currentUser})
   });
 });
 
