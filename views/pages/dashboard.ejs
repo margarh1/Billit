@@ -80,7 +80,7 @@
             <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
           </th>
           <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button></th>
-          <th><button class="btn btn-primary">Email</button></th>
+          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.handleSayHello()">Email</button></th>
           <th><button class="btn btn-warning">Download</button></th>
         </tr>
       </tbody>

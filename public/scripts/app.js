@@ -2,11 +2,20 @@ angular
   .module('billit', [])
   .controller('InvoicesIndexController', InvoicesIndexController);
 
+
   InvoicesIndexController.$inject = ['$http'];
   function InvoicesIndexController($http){
     var vm = this;
     vm.newInvoice = {};
 
+    //on click function
+    vm.handleSayHello =  function() {
+      $http({
+    	method: 'GET',
+      url: '/asd'
+    }).then(function(response) {console.log(response);});
+      console.log("HERE!");
+    }
 
     vm.invoices = [];
     $http({

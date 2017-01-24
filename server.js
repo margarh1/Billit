@@ -7,6 +7,8 @@ var Invoice = require('./models/invoice');
 var session = require('express-session');
 var db = require('./models');
 var app = express();
+var text = 'hello world from email';
+var nodemailer = require('nodemailer');
 
 // middleware
 app.use(express.static('public'));
@@ -21,7 +23,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 
+
 // ROUTES ////////////
+
+
+
+
 
 // get signup route
 app.get('/signup', function (req, res) {
@@ -175,6 +182,31 @@ app.get('/showUser', function(req, res){
   res.render('pages/showuser.ejs')
   console.log();
 })
+
+app.get('/asd', function(req,res){
+  console.log("testing");
+  var transporter = nodemailer.createTransport({
+      service: 'Gmail',
+      auth: {
+          user: 'billitcustomer@gmail.com',
+          pass: 'meanstack'
+      }
+  });
+  var mailOptions = {
+      from: 'kevin2005tran@gmail.com', // sender address
+      to: 'billitcustomer@gmail.com', // list of receivers
+      subject: 'Email Example', // Subject line
+      text: "testing" //, // plaintext body
+  }
+
+  transporter.sendMail(mailOptions, function(error, info){
+  if(error){
+      console.log(error);
+  }else{
+      console.log('Message sent: ' + info.response);
+  };
+});
+});
 
 
 
