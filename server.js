@@ -114,13 +114,39 @@ app.get('/api/invoices', function(req, res) {
 });
 
 // post new invoice to database
+// app.post('/api/invoices', function(req, res) {
+//   Invoice.find({})
+//     .populate('user')
+//     db.Invoice.create(req.body, function(err, invoice) {
+//       if (err) { console.log('post create unsuccessful', err); }
+//       console.log(invoice);
+//       res.json(invoice);
+//     });
+// });
+
+/////////
 app.post('/api/invoices', function(req, res) {
-  Invoice.find({})
-    .populate('user')
-    db.Invoice.create(req.body, function(err, invoice) {
-      if (err) { console.log('post create unsuccessful', err); }
-      console.log(invoice);
-      res.json(invoice);
+    var newInvoice = new Invoice(req.body);
+    User.findOne({
+        name: req.body.user,
+    }, function(err, invoiceUser) {
+        if (err) {
+            console.log(err);
+            return
+        }
+        newInvoice.user = invoiceUser;
+        invoiceUser.invoice.push(newInvoice);
+        invoiceUser.save(function(err, succ) {
+            if (err) {
+                console.log(err);
+            }
+            newInvoice.save(function(err, succ) {
+                if (err) {
+                    console.log(err);
+                }
+                res.redirect('../dashboard');
+            })
+        });
     });
 });
 
@@ -128,7 +154,7 @@ app.post('/api/invoices', function(req, res) {
 app.delete('/api/invoices/:id', function(req, res) {
   Invoice.find({})
   .populate('user')
-  db.Invoice.findOneAndRemove({ _id: req.params.invoiceId }, function(err, foundInvoice){
+  db.Invoice.findOneAndRemove({ _id: req.params.id }, function(err, foundInvoice){
     res.json(foundInvoice);
   });
 });
@@ -145,6 +171,10 @@ app.put('/api/invoices/:id', function(req, res) {
   });
 })
 
+app.get('/showUser', function(req, res){
+  res.render('pages/showuser.ejs')
+  console.log();
+})
 
 
 

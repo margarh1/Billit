@@ -19,9 +19,23 @@
       <div class="col-md-8 text-center">
         <h2>New Invoice</h2>
         <hr>
+
+        <!-- angular templating -->
+            <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
+
+        <!-- new invoice input fields -->
+            <form ng-submit="invoicesIndexCtrl.createInvoice()">
+              <label for="">User:</label>
+              <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" value="">
+              <label for="">Invoice Title:</label>
+              <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" value="">
+              <label for="">Invoice Number:</label>
+              <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" value="">
+              <input type="submit" name="" value="submit">
+              <hr>
+            </form><br>
+            </div>
       </div>
     </div>
-
-
   </body>
 </html>

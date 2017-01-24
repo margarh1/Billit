@@ -9,9 +9,12 @@ var InvoiceSchema = new Schema({
   description: String,
   quantity: Number,
   rate: Number,
-  totalAmount: Number
+  totalAmount: Number,
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
-
 
 var Invoice = mongoose.model('Invoice', InvoiceSchema);
 

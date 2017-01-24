@@ -18,17 +18,21 @@
   <script src="scripts/app.js"></script>
 
   <title>Bill it!</title>
-</head>
-<body>
-<div class="row">
+  </head>
+  <body>
+  <div class="row">
     <% include ../partials/sidebar %>
   <div class="col-md-8 text-center">
     <h2>Dashboard</h2><br><br><br>
     <hr>
+
+<!-- angular templating -->
     <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
 
 <!-- new invoice input fields -->
     <form ng-submit="invoicesIndexCtrl.createInvoice()">
+      <label for="">User:</label>
+      <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" value="">
       <label for="">Invoice Title:</label>
       <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" value="">
       <label for="">Invoice Number:</label>
@@ -40,29 +44,53 @@
 <!-- filter invoices -->
     <input type="text" class="form-group" ng-model="searchText" placeholder="Search Invoices"><br><br>
 
-<!-- templating invoices -->
+<!-- table top row -->
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>Number</th>
+          <th>Date</th>
+          <th>Title</th>
+          <th>Customer Name</th>
+          <th>Status</th>
+          <th>Total Amount</th>
+          <th>EDIT</th>
+          <th>DELETE</th>
+          <th>EMAIL</th>
+          <th>DOWNLOAD</th>
+        </tr>
+      </thead>
+    </table>
+
+<!-- angular templating and bootstrap table -->
     <div ng-repeat="invoice in invoicesIndexCtrl.invoices | orderBy: 'title' | filter: searchText" class="row">
-      <div class="col-md-10 col-md-offset-1">
-        <div class="panel panel-default">
-          <li class="list-group-item">
-            <h4 class="inline-header">Invoice title:</h4>
-            <span ng-hide="editing">{{invoice.title}}</span>
-            <input ng-show="editing" ng-model="invoice.title" type="text" class="form-control input-md">
-          </li>
-          <li class="list-group-item">
-            <h4 class="inline-header">Invoice number:</h4>
-            <span ng-hide="editing">{{invoice.number}}</span>
-            <input ng-show="editing" ng-model="invoice.number" type="text" class="form-control input-md">
-          </li>
-          <button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button>
-          <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit</button>
-          <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
-          </div>
-        </div>
-      </div>
+     <table class="table table-bordered table-hover">
+      <tbody>
+        <tr>
+          <th scope="row"><span ng-hide="editing">{{invoice.number}}</span>
+          <input ng-show="editing" ng-model="invoice.number" type="text" class="form-control input-md"></th>
+          <td>date</td>
+          <td><span ng-hide="editing">{{invoice.title}}</span>
+          <input ng-show="editing" ng-model="invoice.title" type="text" class="form-control input-md"></td>
+          <td>customer name</td>
+          <th>status</th>
+          <th>total amount</th>
+          <th>
+            <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit</button>
+            <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
+          </th>
+          <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button></th>
+          <th><button class="btn btn-primary">Email</button></th>
+          <th><button class="btn btn-warning">Download</button></th>
+        </tr>
+      </tbody>
+     </table>
+    </div>
+
+
 
     </div>
-  </div>
-</div>
+   </div>
+ </div>
 </body>
 </html>

@@ -7,7 +7,11 @@ var Invoice = require('./invoice');
 var UserSchema = new Schema({
   name: String,
   email: String,
-  passwordDigest: String
+  passwordDigest: String,
+  invoice: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Invoice'
+  }]
 });
 
 
