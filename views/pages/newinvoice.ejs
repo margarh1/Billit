@@ -7,35 +7,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-      <!-- angular file -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
+<!-- angular file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
 
-      <script src="scripts.js"></script>
+<!-- script files -->
+    <script src="scripts.js"></script>
     <title>New Invoice</title>
   </head>
   <body>
     <div class="row">
         <% include ../partials/sidebar %>
       <div class="col-md-8 text-center">
-        <h2>New Invoice</h2>
-        <hr>
-
-        <!-- angular templating -->
-            <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
+        <h2>New Invoice</h2><hr><br><br>
 
         <!-- new invoice input fields -->
             <form ng-submit="invoicesIndexCtrl.createInvoice()">
-              <label for="">User:</label>
-              <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" value="">
-              <label for="">Invoice Title:</label>
-              <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" value="">
-              <label for="">Invoice Number:</label>
-              <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" value="">
-              <input type="submit" name="" value="submit">
-              <hr>
-            </form><br>
-            </div>
-      </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Customer Name</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.CUSTOMERNAME" type="text" name="CUSTOMERNAME" class="form-control">
+                  <!-- not connected in schema yet -->
+                </div>
+                <div class="col-md-6">
+                  <label for="">Invoice Title</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" class="form-control">
+                </div>
+              </div><br>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label>Customer Email</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.CUSTOMEREMAIL" type="text" name="CUSTOMEREMAIL" class="form-control">
+                  <!-- not connected in schema yet -->
+                </div>
+                <div class="col-md-6">
+                  <label for="">Invoice Number</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" class="form-control">
+                </div>
+              </div><br>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="">Invoice Date</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.date" type="text" name="Invoice date" class="form-control">
+                </div>
+                <div class="col-md-6">
+                  <label>User Name</label>
+                  <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" class="form-control">
+                </div>
+              </div><br><br><br>
+              <input type="submit" value="submit" class="btn btn-primary">
+            </form>
+
+     </div>
     </div>
   </body>
 </html>

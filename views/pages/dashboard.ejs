@@ -16,36 +16,50 @@
 
 <!-- js files -->
   <script src="scripts/app.js"></script>
-
   <title>Bill it!</title>
   </head>
   <body>
   <div class="row">
     <% include ../partials/sidebar %>
   <div class="col-md-8 text-center">
-    <h2>Dashboard</h2><br><br><br>
-    <hr>
+  <h2>Dashboard</h2><hr><br>
 
+  <div class="text-left">
+    <h4>Quick add</h4>
+  </div>
 <!-- angular templating -->
     <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
 
 <!-- new invoice input fields -->
     <form ng-submit="invoicesIndexCtrl.createInvoice()">
-      <label for="">User:</label>
-      <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" value="">
-      <label for="">Invoice Title:</label>
-      <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" value="">
-      <label for="">Invoice Number:</label>
-      <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" value="">
-      <input type="submit" name="" value="submit">
-      <hr>
-    </form><br>
+      <div class="row">
+        <div class="col-md-2">
+          <!-- <label for="">User:</label> -->
+          <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" class="form-control" placeholder="User">
+        </div>
+        <div class="col-md-2">
+          <!-- <label for="">Invoice Title:</label> -->
+          <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" class="form-control" placeholder="Invoice Title">
+        </div>
+        <div class="col-md-2">
+          <!-- <label for="">Invoice Number:</label> -->
+          <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" class="form-control" placeholder="Invoice Number">
+        </div>
+        <input type="submit" name="" value="submit" class="btn btn-primary">
+      </div>
+    </form><br><hr><br><br>
 
 <!-- filter invoices -->
-    <input type="text" class="form-group" ng-model="searchText" placeholder="Search Invoices"><br><br>
+  <div class="row">
+    <div class="col-md-4">
+      <input type="text" class="form-control" ng-model="searchText" placeholder="Search Invoices">
+    </div>
+  </div>
+  <br><br>
 
 <!-- table top row -->
-    <table class="table table-bordered table-hover">
+  <div class="row">
+    <table class="table">
       <thead>
         <tr>
           <th>Number</th>
@@ -61,10 +75,11 @@
         </tr>
       </thead>
     </table>
+  </div>
 
 <!-- angular templating and bootstrap table -->
-    <div ng-repeat="invoice in invoicesIndexCtrl.invoices | orderBy: 'title' | filter: searchText" class="row">
-     <table class="table table-bordered table-hover">
+<div ng-repeat="invoice in invoicesIndexCtrl.user.invoice | orderBy: 'title' | filter: searchText" class="row">
+     <table class="table table-hover">
       <tbody>
         <tr>
           <th scope="row"><span ng-hide="editing">{{invoice.number}}</span>
@@ -80,14 +95,12 @@
             <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
           </th>
           <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button></th>
-          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.handleSayHello()">Email</button></th>
+          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder()">Email</button></th>
           <th><button class="btn btn-warning">Download</button></th>
         </tr>
       </tbody>
      </table>
     </div>
-
-
 
     </div>
    </div>

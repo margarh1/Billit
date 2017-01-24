@@ -13,22 +13,16 @@ var nodemailer = require('nodemailer');
 // middleware
 app.use(express.static('public'));
 app.use(session({
-  saveUninitialized: true,
-  resave: true,
-  secret: 'SuperSecretCookie',
-  cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
-}));
+    saveUninitialized: true,
+    resave: true,
+    secret: 'SuperSecretCookie',
+    cookie: { maxAge: 30 * 60 * 1000 } // 30 minute cookie lifespan (in milliseconds)
+  }));
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
-
 // ROUTES ////////////
-
-
-
-
 
 // get signup route
 app.get('/signup', function (req, res) {
@@ -120,18 +114,7 @@ app.get('/api/invoices', function(req, res) {
     });
 });
 
-// post new invoice to database
-// app.post('/api/invoices', function(req, res) {
-//   Invoice.find({})
-//     .populate('user')
-//     db.Invoice.create(req.body, function(err, invoice) {
-//       if (err) { console.log('post create unsuccessful', err); }
-//       console.log(invoice);
-//       res.json(invoice);
-//     });
-// });
-
-/////////
+// post to invoices
 app.post('/api/invoices', function(req, res) {
     var newInvoice = new Invoice(req.body);
     User.findOne({
@@ -157,15 +140,6 @@ app.post('/api/invoices', function(req, res) {
     });
 });
 
-// delete an invoice
-app.delete('/api/invoices/:id', function(req, res) {
-  Invoice.find({})
-  .populate('user')
-  db.Invoice.findOneAndRemove({ _id: req.params.id }, function(err, foundInvoice){
-    res.json(foundInvoice);
-  });
-});
-
 app.put('/api/invoices/:id', function(req, res) {
   db.Invoice.findById(req.params.id, function(err, foundInvoice) {
     if(err) { console.log('invoicesController.update error', err); }
@@ -178,12 +152,37 @@ app.put('/api/invoices/:id', function(req, res) {
   });
 })
 
+// delete an invoice
+app.delete('/api/invoices/:id', function(req, res) {
+  Invoice.find({})
+  .populate('user')
+  db.Invoice.findOneAndRemove({ _id: req.params.id }, function(err, foundInvoice){
+    res.json(foundInvoice);
+  });
+});
+
 app.get('/showUser', function(req, res){
   res.render('pages/showuser.ejs')
   console.log();
 })
 
-app.get('/asd', function(req,res){
+// get current user route
+app.get('/api/currentuser', function(req, res) {
+  User.findOne({
+    _id: req.session.userId
+  })
+  .populate('invoice')
+  .exec(function(err, user) {
+     if(!user) {
+       console.log("no user found", null);
+     } else {
+       res.json(user);
+     }
+  });
+})
+
+// get email reminder route & transporter
+app.get('/emailreminder', function(req,res){
   console.log("testing");
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
@@ -207,7 +206,5 @@ app.get('/asd', function(req,res){
   };
 });
 });
-
-
 
 app.listen(process.env.PORT || 3000)

@@ -14,7 +14,6 @@ var UserSchema = new Schema({
   }]
 });
 
-
 // create a new user with secure (hashed) password
 UserSchema.statics.createSecure = function (name, email, password, callback) {
 // `this` references our user model, since this function will be called from the model itself
@@ -55,7 +54,6 @@ UserSchema.statics.authenticate = function (name, email, password, callback) {
    }
  });
 };
-
 
 // compare password user enters with hashed password (`passwordDigest`)
 UserSchema.methods.checkPassword = function (password) {
