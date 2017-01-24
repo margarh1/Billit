@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/billit");
+mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/billit" );
+
 
 var Invoice = require('./invoice');
 var Customer = require('./customer');
