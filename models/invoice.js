@@ -10,6 +10,8 @@ var InvoiceSchema = new Schema({
   quantity: Number,
   rate: Number,
   totalAmount: Number,
+  customerName: String,
+  customerEmail: String,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'

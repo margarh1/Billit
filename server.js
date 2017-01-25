@@ -145,6 +145,13 @@ app.put('/api/invoices/:id', function(req, res) {
     if(err) { console.log('invoicesController.update error', err); }
     foundInvoice.title = req.body.title;
     foundInvoice.number = req.body.number;
+    foundInvoice.date = req.body.date;
+    foundInvoice.status = req.body.status;
+    foundInvoice.customerName = req.body.customerName;
+    foundInvoice.description = req.body.description;
+    foundInvoice.quantity = req.body.quantity;
+    foundInvoice.rate = req.body.rate;
+    foundInvoice.customerEmail = req.body.customerEmail;
     foundInvoice.save(function(err, savedInvoice) {
       if(err) { console.log('saving altered invoice failed'); }
       res.json(savedInvoice);

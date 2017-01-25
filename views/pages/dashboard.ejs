@@ -4,9 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- bootstrap css -->
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -14,14 +15,15 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js" charset="utf-8"></script>
 
-<!-- js files -->
-  <script src="scripts/app.js"></script>
+<!-- script files -->
+<script src="scripts/app.js"></script>
+
   <title>Bill it!</title>
   </head>
   <body>
   <div class="row">
     <% include ../partials/sidebar %>
-  <div class="col-md-8 text-center">
+  <div class="col-md-9 text-center">
   <h2>Dashboard</h2><hr><br>
 
   <div class="text-left">
@@ -33,18 +35,27 @@
 <!-- new invoice input fields -->
     <form ng-submit="invoicesIndexCtrl.createInvoice()">
       <div class="row">
+
         <div class="col-md-2">
-          <!-- <label for="">User:</label> -->
+          <input ng-model="invoicesIndexCtrl.newInvoice.customerName" type="text" name="Invoice customerName" class="form-control" placeholder="Customer Name">
+        </div>
+
+        <div class="col-md-2">
+          <input ng-model="invoicesIndexCtrl.newInvoice.description" type="text" name="Invoice description" class="form-control" placeholder="Description">
+        </div>
+
+        <div class="col-md-2">
+          <input ng-model="invoicesIndexCtrl.newInvoice.totalAmount" type="text" name="Invoice totalAmount" class="form-control" placeholder="Total Amount">
+        </div>
+
+        <div class="col-md-2">
+          <input ng-model="invoicesIndexCtrl.newInvoice.customerEmail" type="text" name="Invoice customerEmail" class="form-control" placeholder="Customer Email">
+        </div>
+
+        <div class="col-md-2">
           <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" class="form-control" placeholder="User">
         </div>
-        <div class="col-md-2">
-          <!-- <label for="">Invoice Title:</label> -->
-          <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" class="form-control" placeholder="Invoice Title">
-        </div>
-        <div class="col-md-2">
-          <!-- <label for="">Invoice Number:</label> -->
-          <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" class="form-control" placeholder="Invoice Number">
-        </div>
+
         <input type="submit" name="" value="submit" class="btn btn-primary">
       </div>
     </form><br><hr><br><br>
@@ -62,12 +73,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Number</th>
+          <th>No#</th>
           <th>Date</th>
           <th>Title</th>
           <th>Customer Name</th>
-          <th>Status</th>
+          <th>Customer Email</th>
+          <th>Description</th>
+          <th>Quantity</th>
+          <th>Rate</th>
           <th>Total Amount</th>
+          <th>Status</th>
           <th>EDIT</th>
           <th>DELETE</th>
           <th>EMAIL</th>
@@ -82,21 +97,42 @@
      <table class="table table-hover">
       <tbody>
         <tr>
-          <th scope="row"><span ng-hide="editing">{{invoice.number}}</span>
-          <input ng-show="editing" ng-model="invoice.number" type="text" class="form-control input-md"></th>
-          <td>date</td>
+          <td><span ng-hide="editing">{{invoice.number}}</span>
+          <input ng-show="editing" ng-model="invoice.number" type="text" class="form-control input-sm" placeholder="number"></td>
+
+          <td><span ng-hide="editing">{{invoice.date}}</span>
+          <input ng-show="editing" ng-model="invoice.date" type="text" class="form-control input-sm" placeholder="date"></td>
+
           <td><span ng-hide="editing">{{invoice.title}}</span>
-          <input ng-show="editing" ng-model="invoice.title" type="text" class="form-control input-md"></td>
-          <td>customer name</td>
-          <th>status</th>
-          <th>total amount</th>
+          <input ng-show="editing" ng-model="invoice.title" type="text" class="form-control input-sm" placeholder="title"></td>
+
+          <td><span ng-hide="editing">{{invoice.customerName}}</span>
+          <input ng-show="editing" ng-model="invoice.customerName" type="text" class="form-control input-sm" placeholder="customer name"></td>
+
+          <td><span ng-hide="editing">{{invoice.customerEmail}}</span>
+          <input ng-show="editing" ng-model="invoice.customerEmail" type="text" class="form-control input-sm" placeholder="customer email"></td>
+
+          <td><span ng-hide="editing">{{invoice.description}}</span>
+          <input ng-show="editing" ng-model="invoice.description" type="text" class="form-control input-sm" placeholder="description"></td>
+
+          <td><span ng-hide="editing">{{invoice.quantity}}</span>
+          <input ng-show="editing" ng-model="invoice.quantity" type="text" class="form-control input-sm" placeholder="Qty"></td>
+
+          <td><span ng-hide="editing">${{invoice.rate}}</span>
+          <input ng-show="editing" ng-model="invoice.rate" type="text" class="form-control input-sm" placeholder="rate"></td>
+
+          <td><span ng-hide="editing"><b>${{invoice.quantity * invoice.rate}}</b></span>
+          <!-- <input ng-show="editing" ng-model="invoice.totalAmount" type="text" class="form-control input-sm" placeholder="total amount"></td> -->
+
+          <td><span ng-hide="editing">{{invoice.status}}</span>
+            <input ng-show="editing" ng-model="invoice.status" type="text" class="form-control input-sm" placeholder="status"></td>
           <th>
-            <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit</button>
-            <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false">Save Changes</button>
+            <button class='btn btn-info' ng-hide="editing" ng-click="editing = true"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+            <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false"><i class="fa fa-check" aria-hidden="true"></i></button>
           </th>
-          <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)">Delete</button></th>
-          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder()">Email</button></th>
-          <th><button class="btn btn-warning">Download</button></th>
+          <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></th>
+          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder()"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></th>
+          <th><button class="btn btn-warning"><i class="fa fa-download" aria-hidden="true"></i></button></th>
         </tr>
       </tbody>
      </table>
