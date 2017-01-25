@@ -190,7 +190,7 @@ app.get('/api/currentuser', function(req, res) {
 
 // get email reminder route & transporter
 app.get('/emailreminder', function(req,res){
-  console.log("testing");
+  console.log("req body is", req);
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {

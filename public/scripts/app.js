@@ -11,7 +11,9 @@ angular
       $http({
     	method: 'GET',
       url: '/emailreminder'
-    }).then(function(response) {console.log(response);});
+    }).then(function(response) {
+
+    });
       alert("Email sent!");
     }
 

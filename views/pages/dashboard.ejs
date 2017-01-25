@@ -131,7 +131,7 @@
             <button class='btn btn-success' ng-show="editing" ng-click="invoicesIndexCtrl.editInvoice(invoice); editing = false"><i class="fa fa-check" aria-hidden="true"></i></button>
           </th>
           <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></th>
-          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder()"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></th>
+          <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder(invoice)"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></th>
           <th><button class="btn btn-warning"><i class="fa fa-download" aria-hidden="true"></i></button></th>
         </tr>
       </tbody>
