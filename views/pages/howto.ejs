@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/css/theme.css">
+  <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -17,39 +21,34 @@
 <body>
   <div class="row">
       <% include ../partials/sidebar %>
-    <div class="col-md-9 text-center">
-      <h2>Getting started</h2><hr><br><br>
+    <div class="col-md-10 text-center mainContent">
+      <h2>Getting started</h2><hr>
 
-      <h4 class="text-left">Step 1</h4>
-      <p>Bacon ipsum dolor amet landjaeger pastrami tenderloin, venison leberkas meatball pork belly beef flank fatback.
-        Pork biltong ball tip, doner spare ribs andouille pork loin ground round frankfurter.
-        Brisket ham hock filet mignon beef, drumstick bresaola prosciutto chuck pig burgdoggen swine venison cow t-bone sirloin.
-      </p><br>
+<div class="gettingStartedInfo">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h4>Quick Add</h4>
+        <p>After logging in / creating an account, you will autmatically land on the dashboard page. The top "Quick Add" section is where you can easily add a fast invoice with just a bit of information - you can always edit, add and delete this invoice! </p><br>
+      </div>
+    </div>
 
-      <h4 class="text-left">Step 2</h4>
-      <p>Bacon ipsum dolor amet landjaeger pastrami tenderloin, venison leberkas meatball pork belly beef flank fatback.
-        Pork biltong ball tip, doner spare ribs andouille pork loin ground round frankfurter.
-        Brisket ham hock filet mignon beef, drumstick bresaola prosciutto chuck pig burgdoggen swine venison cow t-bone sirloin.
-      </p><br>
-
-      <h4 class="text-left">Step 3</h4>
-      <p>Bacon ipsum dolor amet landjaeger pastrami tenderloin, venison leberkas meatball pork belly beef flank fatback.
-        Pork biltong ball tip, doner spare ribs andouille pork loin ground round frankfurter.
-        Brisket ham hock filet mignon beef, drumstick bresaola prosciutto chuck pig burgdoggen swine venison cow t-bone sirloin.
-      </p><br><br>
-
-      <a id="newInvoice" href="/newinvoice" class="btn btn-primary">New Invoice</a>
-
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h4>Create New Invoice</h4>
+        <p>Click on the New Invoice button on the left side navigation. Fill in as many fields as needed. The User field is your user name. Hit save and check the dashboard page for how it looks</p><br>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3 text-center">
+        <h4>Dashboard buttons: Edit, Delete, Email, Print</h4>
+        <p>Edit button: edits that rows invoice and hit save. Delete button: deletes that invoice forever. Email button: sends a friendly reminder email to the customer.
+        Download button: will download the invoice as a pdf.</p>
+      </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
+  <a id="newInvoice" href="/newinvoice" class="btn btn-secondary">New Invoice</a>
+  </div>
+</div>
 </body>
 </html>

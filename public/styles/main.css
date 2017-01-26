@@ -144,3 +144,8 @@ body {
 #topSubmitButton {
   box-shadow: 1px 1px 1px #666666;
 }
+
+.gettingStartedInfo {
+  margin-top: 50px;
+  /*border: 1px solid red;*/
+}

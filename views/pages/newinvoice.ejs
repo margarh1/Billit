@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/css/theme.css">
+  <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/main.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
@@ -21,8 +24,8 @@
   <body>
   <div class="row">
     <% include ../partials/sidebar %>
-  <div class="col-md-9 text-center">
-  <h4>New Invoice</h2><hr><br>
+  <div class="col-md-10 text-center mainContent">
+    <h2>New Invoice</h2><hr>
 
 <!-- angular templating -->
     <div ng-controller="InvoicesIndexController as invoicesIndexCtrl">
@@ -30,42 +33,43 @@
 <!-- new invoice input fields -->
     <form ng-submit="invoicesIndexCtrl.createInvoice()">
       <div class="row">
+
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" class="form-control" placeholder="User">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.customerName" type="text" name="Invoice customerName" class="form-control" placeholder="Customer Name">
         </div>
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" class="form-control" placeholder="Invoice Title">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.customerEmail" type="text" name="Invoice customerEmail" class="form-control" placeholder="Customer Email">
         </div>
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" class="form-control" placeholder="Invoice Number">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.date" type="text" name="Invoice date" class="form-control" placeholder="Date">
         </div>
 
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.customerName" type="text" name="Invoice customerName" class="form-control" placeholder="Customer Name">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.user" type="text" name="user" class="form-control" placeholder="User">
         </div>
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.customerEmail" type="text" name="Invoice customerEmail" class="form-control" placeholder="Customer Email">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.title" type="text" name="Invoice title" class="form-control" placeholder="Invoice Title">
         </div>
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.date" type="text" name="Invoice date" class="form-control" placeholder="Date">
-        </div>
-
-        <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.description" type="text" name="Invoice description" class="form-control" placeholder="Description">
-        </div>
-        <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.quantity" type="text" name="Invoice quantity" class="form-control" placeholder="Quantity">
-        </div>
-        <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.rate" type="text" name="Invoice rate" class="form-control" placeholder="Rate">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.number" type="text" name="Invoice number" class="form-control" placeholder="Invoice Number">
         </div>
 
         <div class="col-md-4">
-          <input ng-model="invoicesIndexCtrl.newInvoice.status" type="text" name="Invoice status" class="form-control" placeholder="status">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.quantity" type="text" name="Invoice quantity" class="form-control" placeholder="Quantity">
+        </div>
+        <div class="col-md-4">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.rate" type="text" name="Invoice rate" class="form-control" placeholder="Rate">
+        </div>
+        <div class="col-md-4">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.status" type="text" name="Invoice status" class="form-control" placeholder="status">
+        </div>
+
+        <div class="col-md-8">
+          <input id="inputBoxes" ng-model="invoicesIndexCtrl.newInvoice.description" type="text" name="Invoice description" class="form-control" placeholder="Description">
         </div>
       </div>
       <br><br><br><br><br>
-      <input type="submit" value="submit" class="btn btn-primary">
+      <input id="topSubmitButton" type="submit" value="submit" class="btn btn-secondary">
     </form><br><br><br>
 
     </div>
