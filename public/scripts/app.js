@@ -29,7 +29,7 @@ angular
     }).then(function(response) {
 
     });
-      // alert("printing!");
+      alert("printing!");
     }
 
     vm.invoices = [];

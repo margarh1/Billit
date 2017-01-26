@@ -6,6 +6,8 @@
 
   <!-- bootstrap css -->
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/css/theme.css">
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -18,13 +20,12 @@
     <div class="col-md-2">
       <div class="text-center sidenavbar">
         <h4><%= user.name %></h4>
-        <a id="signOut" href="/signedout">Sign Out</a>
-        <br><br><br><br>
-        <a id="dashboard" href="/dashboard">Home</a>
-        <br>
-        <a id="howTo" href="/howto">How-to</a>
+        <h5><a id="signOut" href="/signedout">Sign Out</a></h5>
         <br><br>
-        <a id="newInvoice" href="/newinvoice" class="btn btn-primary">New Invoice</a>
+        <h5><a id="dashboard" href="/dashboard">Home</a></h5>
+        <h5><a id="howTo" href="/howto">How-to</a></h5>
+        <br>
+        <h5><a id="newInvoice" href="/newinvoice" class="btn btn-secondary">New Invoice</a></h5>
       </div>
     </div>
   </body>

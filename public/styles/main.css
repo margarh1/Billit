@@ -19,12 +19,13 @@ body {
 .indexBackgroundImage {
   /*border: 1px solid #1e8bc3;*/
   height: 600px;
-  background-image: url("http://i.imgur.com/eKPL2W9.jpg");
+  background-image: url("http://i.imgur.com/tpyMbA4.jpg");
   background-size: cover;
 }
 
 .indexPageLinks {
   margin-left: 20px;
+  margin-top: 20px;
 }
 
 #indexOverview {
@@ -59,5 +60,87 @@ body {
   margin-top: 100px;
   color: white;
   height: 250px;
-  background-color: #666666;
+}
+
+.registrationbox {
+  margin-top: 70px;
+  padding: 50px;
+  border: 2px solid green;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 3px 3px 3px #666666;
+}
+
+#signOut {
+  color: white !important;
+}
+
+#dashboard {
+  color: white !important;
+}
+
+#howTo {
+  color: white !important;
+}
+
+#newInvoice {
+  color: white !important;
+  box-shadow: 1px 1px 1px #666666;
+  background-color: #47b475;
+}
+
+#indexSignUp {
+  color: white;
+}
+
+.indexSignUpButton {
+  background-color: #47b475;
+  box-shadow: 3px 3px 3px #666666;
+}
+
+.mainContent {
+  /*border: 1px solid red;*/
+  margin-top: 20px;
+  padding-right: 60px;
+}
+
+#inputBoxes {
+  border: 1px solid #d7d7d7;
+}
+
+.design {
+  border: 1px solid red;
+}
+
+.btn {
+  min-width: 60px !important;
+  color: white !important;
+}
+
+#printButton {
+  background-color: #ffa500;
+  border: 1px solid #ffa500;
+  box-shadow: 1px 1px 1px #666666;
+}
+
+#emailReminderButton {
+  background-color: #0099cc;
+  border: 1px solid #0099cc;
+  box-shadow: 1px 1px 1px #666666;
+}
+
+#theDeleteButton {
+  background-color: #cc0000;
+  border: 1px solid #cc0000;
+  box-shadow: 1px 1px 1px #666666;
+}
+
+#theEditButton {
+  background-color: #6dc066;
+  border: 1px solid #6dc066;
+  box-shadow: 1px 1px 1px #666666;
+}
+
+#topSubmitButton {
+  box-shadow: 1px 1px 1px #666666;
 }
