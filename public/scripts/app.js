@@ -7,14 +7,29 @@ angular
     var vm = this;
     vm.newInvoice = {};
 
-    vm.emailReminder =  function() {
+    vm.emailReminder =  function(invoice) {
+      var email = invoice.customerEmail;
+      //TODO: could include specific invoice info via passed data
+      // var invoiceTitle = invoice.title;
+      // console.log("got title: " + invoiceTitle);
       $http({
-    	method: 'GET',
-      url: '/emailreminder'
+    	method: 'POST',
+      // data: {invoiceTitle: invoiceTitle},
+      url: '/emailreminder?email='+email
+    }).then(function(response) {
+      // data: {invoiceTitle: invoiceTitle}
+    });
+      alert("Email sent!");
+    }
+
+    vm.printpdf =  function() {
+      $http({
+      method: 'POST',
+      url: '/printpdf'
     }).then(function(response) {
 
     });
-      alert("Email sent!");
+      // alert("printing!");
     }
 
     vm.invoices = [];
@@ -60,6 +75,17 @@ angular
       }).then(function successCallback(json){
       }, function errorCallback(response) {
         console.log('There was an error editing the data', response);
+      });
+    }
+
+    vm.showOneInvoice = function (invoice) {
+      $http({
+        method: 'GET',
+        url: '/api/invoices/' + invoice._id,
+        data: invoice
+      }).then(function successCallback(json){
+      }, function errorCallback(response) {
+        console.log('There was an error rendering one invoice', response);
       });
     }
 

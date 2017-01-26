@@ -9,6 +9,10 @@ var db = require('./models');
 var app = express();
 var text = 'hello world from email';
 var nodemailer = require('nodemailer');
+var fs = require('fs');
+var pdf = require('html-pdf');
+var html = fs.readFileSync('testpdf.html', 'utf8');
+var options = { format: 'Letter' };
 
 // middleware
 app.use(express.static('public'));
@@ -188,9 +192,22 @@ app.get('/api/currentuser', function(req, res) {
   });
 })
 
+app.post('/printpdf', function(req, res1){
+  console.log("print button works!");
+  pdf.create(html, options).toFile('./testpdf.pdf', function(err, res) {
+    if (err) return console.log(err);
+    console.log(res); // { filename: '/app/businesscard.pdf' }
+
+  });
+})
+
 // get email reminder route & transporter
-app.get('/emailreminder', function(req,res){
-  console.log("req body is", req);
+app.post('/emailreminder', function(req,res){
+  var email = req.query.email;
+  console.log("email is: " + email);
+  // console.log("data: " + req.data);
+  // console.log(req.data.invoiceTitle);
+  // console.log("trying to send email");
   var transporter = nodemailer.createTransport({
       service: 'Gmail',
       auth: {
@@ -199,10 +216,10 @@ app.get('/emailreminder', function(req,res){
       }
   });
   var mailOptions = {
-      from: 'kevin2005tran@gmail.com', // sender address
-      to: 'billitcustomer@gmail.com', // list of receivers
-      subject: 'Email Example', // Subject line
-      text: "testing" //, // plaintext body
+      from: 'billitcustomer@gmail.com', // sender address
+      to: email, // list of receivers
+      subject: 'Invoice payment reminder', // Subject line
+      text: "Hi! This is an email reminder to pay your invoice" //, // plaintext body
   }
 
   transporter.sendMail(mailOptions, function(error, info){

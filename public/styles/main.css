@@ -1,3 +1,7 @@
+body {
+  background-color: #f6f6f6;
+}
+
 .box {
   border: 1px solid red;
 }
@@ -13,10 +17,10 @@
 }
 
 .indexBackgroundImage {
-  color: #464545;
-  border: 1px solid #1e8bc3;
+  /*border: 1px solid #1e8bc3;*/
   height: 600px;
-  background-color: #1e8bc3;
+  background-image: url("http://i.imgur.com/eKPL2W9.jpg");
+  background-size: cover;
 }
 
 .indexPageLinks {

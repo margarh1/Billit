@@ -85,7 +85,7 @@
           <th>Status</th>
           <th>EDIT</th>
           <th>DELETE</th>
-          <th>EMAIL</th>
+          <th>REMINDER</th>
           <th>DOWNLOAD</th>
         </tr>
       </thead>
@@ -132,7 +132,7 @@
           </th>
           <th><button class="btn btn-danger" ng-click="invoicesIndexCtrl.deleteInvoice(invoice)"><i class="fa fa-trash-o" aria-hidden="true"></i></button></th>
           <th><button class="btn btn-primary" ng-click="invoicesIndexCtrl.emailReminder(invoice)"><i class="fa fa-envelope-o" aria-hidden="true"></i></button></th>
-          <th><button class="btn btn-warning"><i class="fa fa-download" aria-hidden="true"></i></button></th>
+          <th><button class="btn btn-warning" ng-click="invoicesIndexCtrl.printpdf(invoice)"><i class="fa fa-download" aria-hidden="true"></i></button></th>
         </tr>
       </tbody>
      </table>

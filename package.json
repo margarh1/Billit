@@ -15,7 +15,10 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
+    "html-pdf": "^2.1.0",
     "mongoose": "^4.7.7",
-    "nodemailer": "^2.7.2"
+    "node-pdf": "0.0.4",
+    "nodemailer": "^2.7.2",
+    "pdfkit": "^0.8.0"
   }
 }
